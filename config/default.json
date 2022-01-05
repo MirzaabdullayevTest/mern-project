@@ -1,0 +1,6 @@
+{
+    "port": 5000,
+    "host": "localhost",
+    "jwtSecretKey": "mirzaabdullayev secret key",
+    "mongoUri": "mongodb+srv://mirzaabdullayev:nHByzRBOtg2QRNiE@cluster0.2r8aa.mongodb.net/mern"
+}
