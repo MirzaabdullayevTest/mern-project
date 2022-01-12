@@ -5,6 +5,8 @@ const app = express()
 
 const authRouter = require('./routes/auth.routes')
 
+app.use(express.json({ extended: true }))
+
 app.use('/api/auth', authRouter)
 
 const start = async () => {

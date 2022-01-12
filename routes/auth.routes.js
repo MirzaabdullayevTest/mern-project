@@ -9,10 +9,13 @@ const { check, validationResult } = require('express-validator')
 // /api/auth/register
 router.post('/register',
     [
-        check('email', 'Incorrent email').isEmail(),
+        check('email', 'Incorrent email pleace type @').isEmail(),
         check('password', 'Password min length must be 6 symbols').isLength({ min: 6 })
     ], async (req, res) => {
         try {
+
+            console.log('Body', req.body);
+
             const errors = validationResult(req) // agar error bor bo'lsa errorsga tushadi
 
             if (!errors.isEmpty()) {  // agar error bo'lsa if ga kiradi
@@ -38,12 +41,15 @@ router.post('/register',
             await user.save()
             res.status(201).json({ message: 'User created' })
         } catch (error) {
-            res.status(500).json({ message: 'Something went wrong' })
+            res.status(500).json({ message: 'Something went wrong, try again' })
         }
     })
 
 // /api/auth/login
-router.post('/login', async (req, res) => {
+router.post('/login', [
+    check('email', 'Incorrent email pleace type @').isEmail(),
+    check('password', 'Password min length must be 6 symbols').isLength({ min: 6 })
+], async (req, res) => {
     try {
         const errors = validationResult(req) // agar error bor bo'lsa errorsga tushadi
         if (!errors.isEmpty()) {  // agar error bo'lsa if ga kiradi
