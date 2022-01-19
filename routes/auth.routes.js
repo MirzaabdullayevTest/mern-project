@@ -13,9 +13,6 @@ router.post('/register',
         check('password', 'Password min length must be 6 symbols').isLength({ min: 6 })
     ], async (req, res) => {
         try {
-
-            console.log('Body', req.body);
-
             const errors = validationResult(req) // agar error bor bo'lsa errorsga tushadi
 
             if (!errors.isEmpty()) {  // agar error bo'lsa if ga kiradi

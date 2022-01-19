@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
+import { AuthContext } from '../context/AuthContext'
 
 export const AuthPage = () => {
-
+    const auth = useContext(AuthContext)  //{login: noop, logout}
     const message = useMessage()
 
     const [form, setForm] = useState({
@@ -25,16 +26,16 @@ export const AuthPage = () => {
     const registerHandler = async () => {
         try {
             const data = await request('/api/auth/register', 'POST', { ...form })  //serverdan kelayotgan javob
-
             message(data.message)
         } catch (error) { console.log(error) }
     }
+
     const loginHandler = async () => {
         try {
             const data = await request('/api/auth/login', 'POST', { ...form })  //serverdan kelayotgan javob
 
+            auth.login(data.token, data.userId)
             message(data.message)
-
         } catch (error) { console.log(error) }
     }
 

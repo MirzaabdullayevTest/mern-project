@@ -4,10 +4,12 @@ const config = require('config')
 const app = express()
 
 const authRouter = require('./routes/auth.routes')
+const linkRouter = require('./routes/link.routes')
 
 app.use(express.json({ extended: true }))
 
 app.use('/api/auth', authRouter)
+app.use('/api/link', linkRouter)
 
 const start = async () => {
     try {
